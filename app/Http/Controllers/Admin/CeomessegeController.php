@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Ceomessage;
 use Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class CeomessegeController extends Controller
 {
@@ -54,7 +54,7 @@ class CeomessegeController extends Controller
         $img->save($imageUrl);
 
         $input = $request->all();
-       
+
         $input['image'] = $imageUrl;
          //dd($input);
 
@@ -81,12 +81,12 @@ class CeomessegeController extends Controller
         $input = $request->all();
         $image = $request->file('image');
         if($image){
-            // image with intervention 
+            // image with intervention
             $name =  time().'-'.$image->getClientOriginalName();
             $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp',$name);
             $name = strtolower(preg_replace('/\s+/', '-', $name));
             $uploadpath = 'public/uploads/ceomessage/';
-            $imageUrl = $uploadpath.$name; 
+            $imageUrl = $uploadpath.$name;
             $img=Image::make($image->getRealPath());
             $img->encode('webp', 90);
             $width = "";
@@ -101,7 +101,7 @@ class CeomessegeController extends Controller
         }else{
             $input['image'] = $update_data->image;
         }
-        
+
         $input['status'] = $request->status?1:0;
         //return $input;
         $update_data->update($input);

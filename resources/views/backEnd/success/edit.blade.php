@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <!-- col-end -->
-                            
+
                             <div class="col-sm-6">
                                 <div class="form-group mb-3">
                                     <label for="color" class="form-label">Color *</label>

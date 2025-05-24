@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Gallery;
 use App\Models\GalleryCategory;
 use Brian2694\Toastr\Facades\Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class GalleryController extends Controller
 {
@@ -116,7 +116,7 @@ class GalleryController extends Controller
         Toastr::success('Success', 'Data inactive successfully');
         return redirect()->back();
     }
-    
+
     public function active(Request $request)
     {
         $active = Gallery::find($request->hidden_id);

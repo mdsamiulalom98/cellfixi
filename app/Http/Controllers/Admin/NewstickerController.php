@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Newsticker;
 use Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 use Str;
 
 class NewstickerController extends Controller
@@ -42,13 +42,13 @@ class NewstickerController extends Controller
         Toastr::success('Success','Data insert successfully');
         return redirect()->route('newsticker.index');
     }
-    
+
     public function edit($id)
     {
         $edit_data  = Newsticker::find($id);
         return view('backEnd.newsticker.edit',compact('edit_data'));
     }
-    
+
     public function update(Request $request)
     {
         $this->validate($request, [
@@ -57,14 +57,14 @@ class NewstickerController extends Controller
 
         $update_data = Newsticker::find($request->id);
         $input = $request->all();
-        
+
         $input['status'] = $request->status?1:0;
         $update_data->update($input);
 
         Toastr::success('Success','Data update successfully');
         return redirect()->route('newsticker.index');
     }
- 
+
     public function inactive(Request $request)
     {
         $inactive = Newsticker::find($request->hidden_id);

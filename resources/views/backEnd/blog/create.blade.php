@@ -40,7 +40,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <!-- col-end -->
                             <!-- col end -->
                             <div class="col-sm-6">
                                 <div class="form-group mb-3">

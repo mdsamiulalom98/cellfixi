@@ -5,8 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\WhyChoose;
 use Brian2694\Toastr\Facades\Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 use DB;
 class WhyChooseController extends controller
 {

@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class VideoController extends Controller
 {
@@ -34,10 +34,10 @@ class VideoController extends Controller
             'video' => 'required',
             'status' => 'required',
         ]);
-        
+
 
         $input = $request->all();
-       
+
         // dd($input);
         Video::create($input);
         Toastr::success('Success', 'Data insert successfully');
@@ -59,7 +59,7 @@ class VideoController extends Controller
         $update_data = Video::find($request->id);
 
         $input = $request->all();
-        
+
         $input['status'] = $request->status?1:0;
         $update_data->update($input);
 

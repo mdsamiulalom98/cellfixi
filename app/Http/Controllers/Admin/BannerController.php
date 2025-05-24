@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\BannerCategory;
 use App\Models\Banner;
 use Brian2694\Toastr\Facades\Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 class BannerController extends Controller
 {
     function __construct()

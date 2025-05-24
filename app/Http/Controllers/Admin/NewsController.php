@@ -8,8 +8,8 @@ use App\Models\News;
 use App\Models\EventRegister;
 use App\Models\HowItWork;
 use Brian2694\Toastr\Facades\Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 use Str;
 
 class NewsController extends Controller
@@ -21,7 +21,7 @@ class NewsController extends Controller
          // $this->middleware('permission:blog-edit', ['only' => ['edit','update']]);
          // $this->middleware('permission:blog-delete', ['only' => ['destroy']]);
     }
-    
+
     // event data manage
     public function events_index(Request $request)
     {
@@ -35,13 +35,13 @@ class NewsController extends Controller
         return view('backEnd.eventregister.view',compact('edit_data'));
     }
     // event data manage end
-    
+
     public function index(Request $request)
     {
         $data = News::orderBy('id','DESC')->get();
         return view('backEnd.news.index',compact('data'));
     }
-    
+
     public function create(){
         return view('backEnd.news.create');
     }
@@ -82,7 +82,7 @@ class NewsController extends Controller
         $edit_data = News::find($id);
         return view('backEnd.news.edit',compact('edit_data'));
     }
-    
+
     public function update(Request $request)
     {
         $this->validate($request, [

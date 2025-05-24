@@ -54,6 +54,10 @@ use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\BookOrderController;
 use App\Http\Controllers\Admin\NewstickerController;
 use App\Http\Controllers\Admin\ShippingChargeController;
+use App\Http\Controllers\Admin\SuccessRateController;
+use App\Http\Controllers\Admin\ServiceItemController;
+use App\Http\Controllers\Admin\ServiceQualityController;
+use App\Http\Controllers\Admin\OurPromiseController;
 
 Auth::routes();
 
@@ -733,7 +737,44 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('appointment/active', [AppointmentController::class, 'active'])->name('appointment.active');
     Route::post('appointment/destroy', [AppointmentController::class, 'destroy'])->name('appointment.destroy');
 
+    // our promise info
+    Route::get('our-promise/manage', [OurPromiseController::class, 'index'])->name('ourpromises.index');
+    Route::get('our-promise/create', [OurPromiseController::class, 'create'])->name('ourpromises.create');
+    Route::post('our-promise/save', [OurPromiseController::class, 'store'])->name('ourpromises.store');
+    Route::get('our-promise/{id}/edit', [OurPromiseController::class, 'edit'])->name('ourpromises.edit');
+    Route::post('our-promise/update', [OurPromiseController::class, 'update'])->name('ourpromises.update');
+    Route::post('our-promise/inactive', [OurPromiseController::class, 'inactive'])->name('ourpromises.inactive');
+    Route::post('our-promise/active', [OurPromiseController::class, 'active'])->name('ourpromises.active');
+    Route::post('our-promise/destroy', [OurPromiseController::class, 'destroy'])->name('ourpromises.destroy');
 
+    // service item info
+    Route::get('service-item/manage', [ServiceItemController::class, 'index'])->name('serviceitems.index');
+    Route::get('service-item/create', [ServiceItemController::class, 'create'])->name('serviceitems.create');
+    Route::post('service-item/save', [ServiceItemController::class, 'store'])->name('serviceitems.store');
+    Route::get('service-item/{id}/edit', [ServiceItemController::class, 'edit'])->name('serviceitems.edit');
+    Route::post('service-item/update', [ServiceItemController::class, 'update'])->name('serviceitems.update');
+    Route::post('service-item/inactive', [ServiceItemController::class, 'inactive'])->name('serviceitems.inactive');
+    Route::post('service-item/active', [ServiceItemController::class, 'active'])->name('serviceitems.active');
+    Route::post('service-item/destroy', [ServiceItemController::class, 'destroy'])->name('serviceitems.destroy');
 
+    // service quality info
+    Route::get('service-quality/manage', [ServiceQualityController::class, 'index'])->name('servicequalities.index');
+    Route::get('service-quality/create', [ServiceQualityController::class, 'create'])->name('servicequalities.create');
+    Route::post('service-quality/save', [ServiceQualityController::class, 'store'])->name('servicequalities.store');
+    Route::get('service-quality/{id}/edit', [ServiceQualityController::class, 'edit'])->name('servicequalities.edit');
+    Route::post('service-quality/update', [ServiceQualityController::class, 'update'])->name('servicequalities.update');
+    Route::post('service-quality/inactive', [ServiceQualityController::class, 'inactive'])->name('servicequalities.inactive');
+    Route::post('service-quality/active', [ServiceQualityController::class, 'active'])->name('servicequalities.active');
+    Route::post('service-quality/destroy', [ServiceQualityController::class, 'destroy'])->name('servicequalities.destroy');
+
+    // success rate info
+    Route::get('success-rate/manage', [SuccessRateController::class, 'index'])->name('successrates.index');
+    Route::get('success-rate/create', [SuccessRateController::class, 'create'])->name('successrates.create');
+    Route::post('success-rate/save', [SuccessRateController::class, 'store'])->name('successrates.store');
+    Route::get('success-rate/{id}/edit', [SuccessRateController::class, 'edit'])->name('successrates.edit');
+    Route::post('success-rate/update', [SuccessRateController::class, 'update'])->name('successrates.update');
+    Route::post('success-rate/inactive', [SuccessRateController::class, 'inactive'])->name('successrates.inactive');
+    Route::post('success-rate/active', [SuccessRateController::class, 'active'])->name('successrates.active');
+    Route::post('success-rate/destroy', [SuccessRateController::class, 'destroy'])->name('successrates.destroy');
 
 });

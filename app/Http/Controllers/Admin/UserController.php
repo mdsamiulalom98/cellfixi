@@ -7,8 +7,8 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 use DB;
 use Hash;
 class UserController extends Controller

@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 use Str;
 
 class BlogController extends Controller

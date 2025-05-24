@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Brian2694\Toastr\Facades\Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 use Str;
 class CategoryController extends Controller
 {
@@ -34,7 +34,7 @@ class CategoryController extends Controller
             'name' => 'required',
             'status' => 'required',
         ]);
-      
+
         $input = $request->all();
 
         // image with intervention
@@ -100,7 +100,7 @@ class CategoryController extends Controller
         }else{
             $input['image'] = $update_data->image;
         }
-        
+
         $input['slug'] = strtolower(preg_replace('/\s+/', '-', $request->name));
         $input['slug'] = str_replace('/', '', $input['slug']);
         $input['status'] = $request->status?1:0;

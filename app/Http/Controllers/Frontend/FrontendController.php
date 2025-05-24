@@ -14,6 +14,7 @@ use App\Models\VisitorContact;
 use App\Models\WhyChooseInfo;
 use App\Models\Advertisement;
 use App\Models\EventRegister;
+use App\Models\Subcategory;
 use App\Models\Testimonial;
 use App\Models\Achievement;
 use App\Models\Appointment;
@@ -42,7 +43,8 @@ use App\Models\Offer;
 use App\Models\News;
 use App\Models\Blog;
 use App\Models\Faq;
-use App\Models\Subcategory;
+use App\Models\OurPromise;
+use App\Models\SuccessRate;
 
 class FrontendController extends Controller
 {
@@ -53,7 +55,7 @@ class FrontendController extends Controller
         $whychoose = WhyChoose::where('status', 1)->get();
         $whychooseinfo = WhyChooseInfo::where('status', 1)->first();
         $counter_banner = Banner::where(['status' => 1, 'category_id' => 1])->first();
-        $counter = Counter::where('status', 1)->get();
+        $counters = Counter::where('status', 1)->get();
         $blogs = Blog::where('status', 1)->get();
         $about = About::where('status', 1)->first();
         $events = HowItWork::where('status', 1)->get();
@@ -85,8 +87,9 @@ class FrontendController extends Controller
         $videos = Video::where('status', 1)->limit(1)->get();
         $category = Category::where(['status' => 1])->first();
         $products = Product::where(['status' => 1, 'category_id'=> $category->id])->get();
-
-        return view('frontEnd.layouts.pages.index', compact('sliders', 'service_all', 'whychoose', 'onlycourse', 'counter', 'counter_banner', 'blogs', 'companyphoto', 'testimonials', 'about', 'advertisement', 'books', 'events', 'brands', 'achievment', 'agencyleft', 'agencyright', 'oursuccess', 'weoffer', 'ceomessage', 'videos', 'image_cat', 'certificate', 'whychooseinfo', 'products'));
+        $our_promise = OurPromise::where('status', 1)->first();
+        $success_rates = SuccessRate::where('status', 1)->get();
+        return view('frontEnd.layouts.pages.index', compact('sliders', 'service_all', 'whychoose', 'onlycourse', 'counters', 'counter_banner', 'blogs', 'companyphoto', 'testimonials', 'about', 'advertisement', 'books', 'events', 'brands', 'achievment', 'agencyleft', 'agencyright', 'oursuccess', 'weoffer', 'ceomessage', 'videos', 'image_cat', 'certificate', 'whychooseinfo', 'products', 'our_promise', 'success_rates'));
     }
 
     public function about_us()

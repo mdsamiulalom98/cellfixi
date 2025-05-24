@@ -6,8 +6,8 @@ use App\Models\GeneralSetting;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 use DB;
 class GeneralSettingController extends Controller
 {

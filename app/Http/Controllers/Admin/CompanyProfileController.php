@@ -7,8 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CompanyProfile;
 use Brian2694\Toastr\Facades\Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 use Str;
 
 class CompanyProfileController extends Controller
@@ -33,7 +33,7 @@ class CompanyProfileController extends Controller
 
     public function store(Request $request)
     {
-        
+
         $this->validate($request, [
             'pdf' => 'required|mimes:pdf',
             'status' => 'required',
@@ -41,7 +41,7 @@ class CompanyProfileController extends Controller
 
         $input = $request->all();
 
-        
+
         $fileone = $request->file('pdf');
         $nameone = time().'-'.$fileone->getClientOriginalName();
         $uploadPathone = 'public/uploads/companyprofile/';

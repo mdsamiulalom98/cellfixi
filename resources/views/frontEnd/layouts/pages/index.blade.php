@@ -90,7 +90,12 @@
                 <div class="col-sm-6 order-sm-1 order-2">
                     <div class="slider-title">
                         <p>Professional</p>
-                        <h2><span id="typewriter"></span> <span class="cursor"></span></h2>
+                        <div id="text-container">
+                            @foreach ($sliders as $key => $value)
+                                <div class="text-line">{{ $value->title }}</div>
+                            @endforeach
+                        </div>
+
                         <div class="slider-buttons">
                             <a href="{{ route('about_us') }}" class="slider-btn white-button">About Us</a>
                             <a href="{{ route('contact') }}" class="slider-btn transparent-button">Contact Us</a>
@@ -139,7 +144,7 @@
                     <div class="main__sec__subcat_front">
                         @foreach ($image_cat as $key => $value)
                             <div class=" wow animate__bounceIn" data-wow-duration="0.6s"
-                                    data-wow-delay="{{ $key * 0.1 }}s">
+                                data-wow-delay="{{ $key * 0.1 }}s">
 
                                 <div class="item__subcat ">
                                     <div class="subcat__image"><a href="{{ route('category', $value->slug) }}"><img
@@ -160,31 +165,85 @@
     <section class="about-us">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6 wow animate__bounceIn" data-wow-duration="1s" >
+                <div class="col-sm-6 wow animate__bounceIn" data-wow-duration="1s">
                     <div class="about__image">
                         <img src="{{ asset($about->image) }}" alt="">
-                        <div class="about__image__overlay">
-                            <h3>25</h3>
-                            <p>Years Experience</p>
-                        </div>
+
                     </div>
                 </div>
-                <div class="col-sm-6 wow animate__bounceIn" data-wow-duration="1s" >
+                <div class="col-sm-6 wow animate__bounceIn" data-wow-duration="1s">
                     <div class="about__content__wrapper">
                         <div class="about__title">
-                            <strong>About Us</strong>
-                            <h2>{{ $about->title }}</h2>
+                            <h2>{!! $about->title !!}</h2>
+                            <h2>{!! $about->subtitle !!}</h2>
                         </div>
+                        <hr>
                         <div class="about__content">
                             <p>{!! $about->description !!}</p>
+                            <div class="about-button-wrapper">
+                                <a href="{{ route('about_us') }}">
+                                    About Us
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div class="service-counter-wrapper">
+                <div class="row">
+                    @foreach ($counters as $key => $value)
+                        <div class="col-sm-3 wow animate__bounceIn" data-wow-duration="1s" data-wow-delay="{{ $key * 0.1 }}s">
+                            <div class="service-stat-item">
+                                <div class="service-item-image">
+                                    <img src="{{ asset($value->image) }}" alt="{{ $value->title }}" class="">
+                                </div>
+                                <h2 class="">{{ $value->counter }}+</h2>
+                                <h3 class="">{{ $value->title }}</h3>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </section>
     <!-- about ends -->
+    <section class="our-promise-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="content">
+                        <div class="title">
+                            <h2>{!! $our_promise->title !!}</h2>
+                        </div>
+                        <hr>
+                        <div class="description">
+                            {!! $our_promise->description !!}
+                        </div>
+                        <div class="success-rate-wrapper">
+                            @foreach ($success_rates as $key => $value)
+                            <div class="success-rate-item" style="width: {{ $value->count }}%">
+                                <strong>{{ $value->title }}</strong>
+                                <span>{{ $value->count }}%</span>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="image">
+                        <img src="{{ asset($our_promise->image) }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- about ends -->
+    <!-- about ends -->
+    <!-- about ends -->
+    <!-- about ends -->
+
     <section class="home-page-products">
         <div class="container">
             <div class="row">
@@ -209,7 +268,8 @@
                 <div class="col-sm-12">
                     <div class="product-list-wrapper">
                         @foreach ($products as $key => $value)
-                            <div class="product_item wist_item wow animate__fadeIn" data-wow-duration="1s" data-wow-delay="{{ $key * 0.1 }}s">
+                            <div class="product_item wist_item wow animate__fadeIn" data-wow-duration="1s"
+                                data-wow-delay="{{ $key * 0.1 }}s">
                                 @include('frontEnd.layouts.partials.product')
                             </div>
                         @endforeach
@@ -239,7 +299,8 @@
                     <div class="col-sm-7">
                         <div class="why-choose-item-wrapper">
                             @foreach ($whychoose as $key => $value)
-                                <div class="why-choose-item wow animate__bounceIn" data-wow-duration="1s" data-wow-delay="{{ $key * 0.3 }}s">
+                                <div class="why-choose-item wow animate__bounceIn" data-wow-duration="1s"
+                                    data-wow-delay="{{ $key * 0.3 }}s">
                                     <div class="icon">
                                         <i class="{{ $value->icon }}"></i>
                                     </div>
@@ -367,51 +428,20 @@
         });
     </script>
     <script>
-        function typeWriterEffect(element, texts, speed = 100, pause = 1500) {
-            let index = 0;
-            let charIndex = 0;
-            let isDeleting = false;
+        const lines = document.querySelectorAll('#text-container .text-line');
+        let currentIndex = 0;
 
-            function type() {
-                const currentText = texts[index];
+        function showNextLine() {
+            lines.forEach(line => line.classList.remove('active'));
+            lines[currentIndex].classList.add('active');
 
-                // Typing or deleting logic
-                if (isDeleting) {
-                    charIndex--;
-                } else {
-                    charIndex++;
-                }
-
-                // Set text
-                $(element).text(currentText.substring(0, charIndex));
-
-                let nextSpeed = isDeleting ? speed / 2 : speed;
-
-                if (!isDeleting && charIndex === currentText.length) {
-                    // Finished typing
-                    isDeleting = true;
-                    nextSpeed = pause;
-                } else if (isDeleting && charIndex === 0) {
-                    // Finished deleting
-                    isDeleting = false;
-                    index = (index + 1) % texts.length;
-                    nextSpeed = speed;
-                }
-
-                setTimeout(type, nextSpeed);
-            }
-
-            type();
+            currentIndex = (currentIndex + 1) % lines.length;
         }
-        // Initialize typewriter effect
 
-        // Usage
-        $(document).ready(function() {
-            typeWriterEffect("#typewriter", [
-                {!! $sliders->pluck('title')->map(function ($item) {
-                        return json_encode($item);
-                    })->implode(',') !!}
-            ]);
-        });
+        // Initial show
+        showNextLine();
+
+        // Change every 2 seconds
+        setInterval(showNextLine, 2000);
     </script>
 @endpush

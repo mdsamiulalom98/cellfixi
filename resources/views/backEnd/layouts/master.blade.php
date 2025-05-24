@@ -216,9 +216,7 @@
                                 <span> Dashboard </span>
                             </a>
                         </li>
-
                         <!-- nav items -->
-
                         <li>
                             <a href="#sidebar-users" data-bs-toggle="collapse">
                                 <i data-feather="user"></i>
@@ -313,7 +311,7 @@
                             </div>
                         </li>
 
-                         <li>
+                        <li>
                             <a href="#sidebar-blogs" data-bs-toggle="collapse">
                                 <i data-feather="globe"></i>
                                 <span>Blog</span>
@@ -334,28 +332,41 @@
                                 </ul>
                             </div>
                         </li>
-
-
-
-                        <!--<li>-->
-                        <!--    <a href="#sidebar-ceomessage" data-bs-toggle="collapse">-->
-                        <!--        <i data-feather="message-square"></i>-->
-                        <!--        <span> CEO Message </span>-->
-                        <!--        <span class="menu-arrow"></span>-->
-                        <!--    </a>-->
-                        <!--    <div class="collapse" id="sidebar-ceomessage">-->
-                        <!--        <ul class="nav-second-level">-->
-                        <!--            <li>-->
-                        <!--                <a href="{{ route('ceomessages.create') }}"><i data-feather="minus"></i>-->
-                        <!--                    Create</a>-->
-                        <!--            </li>-->
-                        <!--            <li>-->
-                        <!--                <a href="{{ route('ceomessages.index') }}"><i data-feather="minus"></i>-->
-                        <!--                    Manage</a>-->
-                        <!--            </li>-->
-                        <!--        </ul>-->
-                        <!--    </div>-->
-                        <!--</li>-->
+                        <!-- nav items end -->
+                        <li>
+                            <a href="#sidebar-counter" data-bs-toggle="collapse">
+                                <i data-feather="percent"></i>
+                                <span> Website Setting </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebar-counter">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a href="{{ route('counter.index') }}"><i data-feather="minus"></i>
+                                            Counter</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('ourpromises.index') }}"><i data-feather="minus"></i>
+                                            Our Promise</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('successrates.index') }}"><i data-feather="minus"></i>
+                                            Success Rate
+                                            </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('servicequalities.index') }}"><i data-feather="minus"></i>
+                                            Service Quality
+                                            </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('serviceitems.index') }}"><i data-feather="minus"></i>
+                                            Service Items
+                                            </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
                         <!-- nav items end -->
                         <li>
                             <a href="#sidebar-about" data-bs-toggle="collapse">
@@ -372,10 +383,11 @@
                                     </li>
 
                                     <li>
-                                        <a href="{{ route('missionvission.index') }}"><i data-feather="minus"></i> Mission
+                                        <a href="{{ route('missionvission.index') }}"><i data-feather="minus"></i>
+                                            Mission
                                             Manage</a>
                                     </li>
-                                    
+
                                 </ul>
                             </div>
                         </li>
@@ -411,7 +423,8 @@
                                         <a href="{{ route('whychoose.create') }}"><i data-feather="minus"></i>New</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('whychooseinfos.index') }}"><i data-feather="minus"></i>Info</a>
+                                        <a href="{{ route('whychooseinfos.index') }}"><i
+                                                data-feather="minus"></i>Info</a>
                                     </li>
                                 </ul>
                             </div>

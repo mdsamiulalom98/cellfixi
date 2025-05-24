@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Advertisement;
 use Brian2694\Toastr\Facades\Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class AdvertisementController extends Controller
 {
@@ -50,14 +50,14 @@ class AdvertisementController extends Controller
             $constraint->aspectRatio();
         });
         $img->save($imageUrl);
-        
-        
+
+
         $image2 = $request->file('image2');
         $name2 =  time().'-'.$image2->getClientOriginalName();
         $name2 = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp',$name2);
         $name2 = strtolower(preg_replace('/\s+/', '-', $name2));
         $uploadpath2 = 'public/uploads/advertisement/';
-        $image2Url = $uploadpath2.$name2; 
+        $image2Url = $uploadpath2.$name2;
         $img2=Image::make($image2->getRealPath());
         $img2->encode('webp', 90);
         $width2 = '';
@@ -65,7 +65,7 @@ class AdvertisementController extends Controller
         $img2->height() > $img2->width() ? $width2=null : $height2=null;
         $img2->resize($width2, $height2);
         $img2->save($image2Url);
-        
+
         $input['image'] = $imageUrl;
         $input['image2'] = $image2Url;
 
@@ -114,16 +114,16 @@ class AdvertisementController extends Controller
         }else{
             $input['image'] = $update_data->image;
         }
-        
+
         $image2 = $request->file('image2');
         if($image2){
-            // image with intervention 
+            // image with intervention
             $image2 = $request->file('image2');
             $name2 =  time().'-'.$image2->getClientOriginalName();
             $name2 = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp',$name2);
             $name2 = strtolower(preg_replace('/\s+/', '-', $name2));
             $uploadpath2 = 'public/uploads/advertisement/';
-            $image2Url = $uploadpath2.$name2; 
+            $image2Url = $uploadpath2.$name2;
             $img2=Image::make($image2->getRealPath());
             $img2->encode('webp', 90);
             $width2 = '';
@@ -135,8 +135,8 @@ class AdvertisementController extends Controller
         }else{
             $input['image2'] = $update_data->image2;
         }
-        
-        
+
+
         $input['status'] = $request->status?1:0;
         $update_data->update($input);
 

@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MissionVission;
 use Brian2694\Toastr\Facades\Toastr;
-use Image;
-use File;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class MissionVissionController extends Controller
 {
@@ -116,7 +116,7 @@ class MissionVissionController extends Controller
         Toastr::success('Success', 'Data inactive successfully');
         return redirect()->back();
     }
-    
+
     public function active(Request $request)
     {
         $active = MissionVission::find($request->hidden_id);
