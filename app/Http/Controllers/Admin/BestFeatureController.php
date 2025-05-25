@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Brian2694\Toastr\Facades\Toastr;
 use Intervention\Image\Facades\Image;
-use App\Models\HowItWork;
+use Brian2694\Toastr\Facades\Toastr;
+use App\Models\BestFeature;
 
-class HowItWorkController extends Controller
+class BestFeatureController extends Controller
 {
+
 
     function __construct()
     {
@@ -22,12 +23,12 @@ class HowItWorkController extends Controller
 
     public function index(Request $request)
     {
-        $show_data = HowItWork::orderBy('id', 'DESC')->get();
-        return view('backEnd.howitwork.index', compact('show_data'));
+        $show_data = BestFeature::orderBy('id', 'DESC')->get();
+        return view('backEnd.bestfeature.index', compact('show_data'));
     }
     public function create()
     {
-        return view('backEnd.howitwork.create');
+        return view('backEnd.bestfeature.create');
     }
     public function store(Request $request)
     {
@@ -36,14 +37,12 @@ class HowItWorkController extends Controller
             'status' => 'required',
         ]);
         // image with intervention
-        $input = $request->all();
-        return $input;
         $image = $request->file('image');
         if ($image) {
             $name =  time() . '-' . $image->getClientOriginalName();
             $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
             $name = strtolower(preg_replace('/\s+/', '-', $name));
-            $uploadpath = 'public/uploads/howitwork/';
+            $uploadpath = 'public/uploads/bestfeature/';
             $imageUrl = $uploadpath . $name;
             $img = Image::make($image->getRealPath());
             $img->encode('webp', 90);
@@ -57,16 +56,17 @@ class HowItWorkController extends Controller
         } else {
             $imageUrl = null;
         }
+        $input = $request->all();
         $input['image'] = $imageUrl;
-        HowItWork::create($input);
+        BestFeature::create($input);
         Toastr::success('Success', 'Data insert successfully');
-        return redirect()->route('howitworks.index');
+        return redirect()->route('bestfeatures.index');
     }
 
     public function edit($id)
     {
-        $edit_data = HowItWork::find($id);
-        return view('backEnd.howitwork.edit', compact('edit_data'));
+        $edit_data = BestFeature::find($id);
+        return view('backEnd.bestfeature.edit', compact('edit_data'));
     }
 
     public function update(Request $request)
@@ -75,14 +75,14 @@ class HowItWorkController extends Controller
             'title' => 'required',
         ]);
         $input = $request->except('hidden_id');
-        $update_data = HowItWork::find($request->hidden_id);
+        $update_data = BestFeature::find($request->hidden_id);
         $image = $request->file('image');
         if ($image) {
             // image with intervention
             $name =  time() . '-' . $image->getClientOriginalName();
             $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
             $name = strtolower(preg_replace('/\s+/', '-', $name));
-            $uploadpath = 'public/uploads/howitwork/';
+            $uploadpath = 'public/uploads/bestfeature/';
             $imageUrl = $uploadpath . $name;
             $img = Image::make($image->getRealPath());
             $img->encode('webp', 90);
@@ -101,12 +101,12 @@ class HowItWorkController extends Controller
         $update_data->update($input);
 
         Toastr::success('Success', 'Data update successfully');
-        return redirect()->route('howitworks.index');
+        return redirect()->route('bestfeatures.index');
     }
 
     public function inactive(Request $request)
     {
-        $inactive = HowItWork::find($request->hidden_id);
+        $inactive = BestFeature::find($request->hidden_id);
         $inactive->status = 0;
         $inactive->save();
         Toastr::success('Success', 'Data inactive successfully');
@@ -114,7 +114,7 @@ class HowItWorkController extends Controller
     }
     public function active(Request $request)
     {
-        $active = HowItWork::find($request->hidden_id);
+        $active = BestFeature::find($request->hidden_id);
         $active->status = 1;
         $active->save();
         Toastr::success('Success', 'Data active successfully');
@@ -122,7 +122,7 @@ class HowItWorkController extends Controller
     }
     public function destroy(Request $request)
     {
-        $delete_data = HowItWork::find($request->hidden_id);
+        $delete_data = BestFeature::find($request->hidden_id);
         $delete_data->delete();
         Toastr::success('Success', 'Data delete successfully');
         return redirect()->back();

@@ -49,6 +49,7 @@ use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\CeomessegeController;
 use App\Http\Controllers\Admin\AgencyController;
+use App\Http\Controllers\Admin\BestFeatureController;
 use App\Http\Controllers\Admin\SuccessController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\BookOrderController;
@@ -673,15 +674,15 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('faq/destroy', [FaqController::class, 'destroy'])->name('faqs.destroy');
 
     // upcomming events routes
-    Route::get('upcommingevent/manage', [HowItWorkController::class, 'index'])->name('upcommingevents.index');
-    Route::get('upcommingevent/{id}/show', [HowItWorkController::class, 'show'])->name('upcommingevents.show');
-    Route::get('upcommingevent/create', [HowItWorkController::class, 'create'])->name('upcommingevents.create');
-    Route::post('upcommingevent/save', [HowItWorkController::class, 'store'])->name('upcommingevents.store');
-    Route::get('upcommingevent/{id}/edit', [HowItWorkController::class, 'edit'])->name('upcommingevents.edit');
-    Route::post('upcommingevent/update', [HowItWorkController::class, 'update'])->name('upcommingevents.update');
-    Route::post('upcommingevent/inactive', [HowItWorkController::class, 'inactive'])->name('upcommingevents.inactive');
-    Route::post('upcommingevent/active', [HowItWorkController::class, 'active'])->name('upcommingevents.active');
-    Route::post('upcommingevent/destroy', [HowItWorkController::class, 'destroy'])->name('upcommingevents.destroy');
+    Route::get('howitwork/manage', [HowItWorkController::class, 'index'])->name('howitworks.index');
+    Route::get('howitwork/{id}/show', [HowItWorkController::class, 'show'])->name('howitworks.show');
+    Route::get('howitwork/create', [HowItWorkController::class, 'create'])->name('howitworks.create');
+    Route::post('howitwork/save', [HowItWorkController::class, 'store'])->name('howitworks.store');
+    Route::get('howitwork/{id}/edit', [HowItWorkController::class, 'edit'])->name('howitworks.edit');
+    Route::post('howitwork/update', [HowItWorkController::class, 'update'])->name('howitworks.update');
+    Route::post('howitwork/inactive', [HowItWorkController::class, 'inactive'])->name('howitworks.inactive');
+    Route::post('howitwork/active', [HowItWorkController::class, 'active'])->name('howitworks.active');
+    Route::post('howitwork/destroy', [HowItWorkController::class, 'destroy'])->name('howitworks.destroy');
 
     // portfolio categories
     Route::get('portfolio-category/manage', [PortfolioCategoryController::class, 'index'])->name('portfolio_category.index');
@@ -777,4 +778,14 @@ Route::group(['namespace' => 'Admin', 'middleware' => ['auth', 'lock', 'check_re
     Route::post('success-rate/active', [SuccessRateController::class, 'active'])->name('successrates.active');
     Route::post('success-rate/destroy', [SuccessRateController::class, 'destroy'])->name('successrates.destroy');
 
+        // upcomming events routes
+    Route::get('bestfeature/manage', [BestFeatureController::class, 'index'])->name('bestfeatures.index');
+    Route::get('bestfeature/{id}/show', [BestFeatureController::class, 'show'])->name('bestfeatures.show');
+    Route::get('bestfeature/create', [BestFeatureController::class, 'create'])->name('bestfeatures.create');
+    Route::post('bestfeature/save', [BestFeatureController::class, 'store'])->name('bestfeatures.store');
+    Route::get('bestfeature/{id}/edit', [BestFeatureController::class, 'edit'])->name('bestfeatures.edit');
+    Route::post('bestfeature/update', [BestFeatureController::class, 'update'])->name('bestfeatures.update');
+    Route::post('bestfeature/inactive', [BestFeatureController::class, 'inactive'])->name('bestfeatures.inactive');
+    Route::post('bestfeature/active', [BestFeatureController::class, 'active'])->name('bestfeatures.active');
+    Route::post('bestfeature/destroy', [BestFeatureController::class, 'destroy'])->name('bestfeatures.destroy');
 });

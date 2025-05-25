@@ -352,17 +352,32 @@
                                     <li>
                                         <a href="{{ route('successrates.index') }}"><i data-feather="minus"></i>
                                             Success Rate
-                                            </a>
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="{{ route('servicequalities.index') }}"><i data-feather="minus"></i>
                                             Service Quality
-                                            </a>
+                                        </a>
                                     </li>
                                     <li>
                                         <a href="{{ route('serviceitems.index') }}"><i data-feather="minus"></i>
                                             Service Items
-                                            </a>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('howitworks.index') }}"><i data-feather="minus"></i>
+                                            How It Works
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('whychoose.index') }}"><i data-feather="minus"></i>
+                                            Why Choose Us
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('bestfeatures.index') }}"><i data-feather="minus"></i>
+                                            Best Features
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -411,24 +426,7 @@
                         <!--    </div>-->
                         <!--</li>-->
                         <!-- nav items end -->
-                        <li>
-                            <a href="#whychoose" data-bs-toggle="collapse">
-                                <i data-feather="youtube"></i>
-                                <span> Why Choose </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="whychoose">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <a href="{{ route('whychoose.create') }}"><i data-feather="minus"></i>New</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('whychooseinfos.index') }}"><i
-                                                data-feather="minus"></i>Info</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+
                         <!-- nav items end -->
 
                         <!--<li>-->

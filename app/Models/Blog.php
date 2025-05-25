@@ -13,8 +13,5 @@ class Blog extends Model
         return $this->hasOne(BlogCategory::class, 'id', 'category_id');
     }
 
-    public function articalecat()
-    {
-        return $this->hasOne(ArticaleCategory::class, 'id', 'category_id');
-    }
+    
 }

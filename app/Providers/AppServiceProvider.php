@@ -9,7 +9,6 @@ use App\Models\Category;
 use App\Models\SocialMedia;
 use App\Models\Contact;
 use App\Models\CreatePage;
-use App\Models\ArticaleCategory;
 use App\Models\Blog;
 use App\Models\Newsticker;
 use App\Models\Service;
@@ -59,8 +58,7 @@ class AppServiceProvider extends ServiceProvider
                 return Contact::where(['status' => 1, 'id' => 2])->first();
             });
 
-            $menucategories = ArticaleCategory::where('status', 1)->get();
-            view()->share('menucategories', $menucategories);
+
 
             $orderstatus = OrderStatus::get();
             view()->share('orderstatus', $orderstatus);

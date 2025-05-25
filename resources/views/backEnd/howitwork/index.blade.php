@@ -1,5 +1,5 @@
 @extends('backEnd.layouts.master')
-@section('title', 'Service Quality')
+@section('title', 'How It Works Manage')
 @section('css')
     <link href="{{ asset('/public/backEnd/') }}/assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css"
         rel="stylesheet" type="text/css" />
@@ -10,7 +10,6 @@
     <link href="{{ asset('/public/backEnd/') }}/assets/libs/datatables.net-select-bs5/css/select.bootstrap5.min.css"
         rel="stylesheet" type="text/css" />
 @endsection
-
 @section('content')
     <div class="container-fluid">
 
@@ -19,9 +18,9 @@
             <div class="col-12">
                 <div class="page-title-box">
                     <div class="page-title-right">
-                        <a href="{{ route('servicequalities.create') }}" class="btn btn-primary rounded-pill">Create</a>
+                        <a href="{{ route('howitworks.create') }}" class="btn btn-primary rounded-pill">Create</a>
                     </div>
-                    <h4 class="page-title">Service Quality</h4>
+                    <h4 class="page-title">How It Works Manage</h4>
                 </div>
             </div>
         </div>
@@ -35,18 +34,18 @@
                                 <tr>
                                     <th>SL</th>
                                     <th>Title</th>
-                                    <th>Description</th>
+                                    <th>Image</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach ($data as $key => $value)
+                                @foreach ($show_data as $key => $value)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{!! $value->title !!}</td>
-                                        <td>{{ Str::limit($value->description, 50) }}</td>
+                                        <td>{{ $value->title }}</td>
+                                        <td><img src="{{ asset($value->image) }}" style="height: 60px; width: auto;" alt=""></td>
                                         <td>
                                             @if ($value->status == 1)
                                                 <span class="badge bg-soft-success text-success">Active</span>
@@ -57,7 +56,7 @@
                                         <td>
                                             <div class="button-list">
                                                 @if ($value->status == 1)
-                                                    <form method="post" action="{{ route('servicequalities.inactive') }}"
+                                                    <form method="post" action="{{ route('howitworks.inactive') }}"
                                                         class="d-inline">
                                                         @csrf
                                                         <input type="hidden" value="{{ $value->id }}" name="hidden_id">
@@ -66,7 +65,7 @@
                                                                 class="fe-thumbs-down"></i></button>
                                                     </form>
                                                 @else
-                                                    <form method="post" action="{{ route('servicequalities.active') }}"
+                                                    <form method="post" action="{{ route('howitworks.active') }}"
                                                         class="d-inline">
                                                         @csrf
                                                         <input type="hidden" value="{{ $value->id }}" name="hidden_id">
@@ -76,11 +75,11 @@
                                                     </form>
                                                 @endif
 
-                                                <a href="{{ route('servicequalities.edit', $value->id) }}"
+                                                <a href="{{ route('howitworks.edit', $value->id) }}"
                                                     class="btn btn-xs btn-primary waves-effect waves-light"><i
                                                         class="fe-edit-1"></i></a>
 
-                                                <form method="post" action="{{ route('servicequalities.destroy') }}"
+                                                <form method="post" action="{{ route('howitworks.destroy') }}"
                                                     class="d-inline">
                                                     @csrf
                                                     <input type="hidden" value="{{ $value->id }}" name="hidden_id">

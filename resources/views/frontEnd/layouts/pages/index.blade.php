@@ -194,7 +194,8 @@
             <div class="service-counter-wrapper">
                 <div class="row">
                     @foreach ($counters as $key => $value)
-                        <div class="col-sm-3 wow animate__bounceIn" data-wow-duration="1s" data-wow-delay="{{ $key * 0.1 }}s">
+                        <div class="col-sm-3 wow animate__bounceIn" data-wow-duration="1s"
+                            data-wow-delay="{{ $key * 0.1 }}s">
                             <div class="service-stat-item">
                                 <div class="service-item-image">
                                     <img src="{{ asset($value->image) }}" alt="{{ $value->title }}" class="">
@@ -214,25 +215,29 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="content">
-                        <div class="title">
+                        <div class="title wow animate__bounceIn" data-wow-duration="1s"
+                                        data-wow-delay="{{ $key * 0.3 }}s">
                             <h2>{!! $our_promise->title !!}</h2>
                         </div>
                         <hr>
-                        <div class="description">
+                        <div class="description wow animate__bounceIn" data-wow-duration="1s"
+                                        data-wow-delay="{{ $key * 0.3 }}s">
                             {!! $our_promise->description !!}
                         </div>
                         <div class="success-rate-wrapper">
                             @foreach ($success_rates as $key => $value)
-                            <div class="success-rate-item" style="width: {{ $value->count }}%">
-                                <strong>{{ $value->title }}</strong>
-                                <span>{{ $value->count }}%</span>
-                            </div>
+                                <div class="success-rate-item wow animate__bounceIn" data-wow-duration="1s"
+                                        data-wow-delay="{{ $key * 0.3 }}s" style="width: {{ $value->count }}%" >
+                                    <strong>{{ $value->title }}</strong>
+                                    <span>{{ $value->count }}%</span>
+                                </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="image">
+                    <div class="image wow animate__bounceIn" data-wow-duration="1s"
+                                        data-wow-delay="{{ $key * 0.3 }}s">
                         <img src="{{ asset($our_promise->image) }}" alt="">
                     </div>
                 </div>
@@ -240,6 +245,76 @@
         </div>
     </section>
     <!-- about ends -->
+    <section class="service-quality-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="service-item-wrapper">
+                        @foreach ($service_items as $key => $value)
+                            @if ($loop->index >= 2)
+                                @break
+                            @endif
+                            <div class="service-item wow animate__bounceIn" data-wow-duration="1s"
+                                data-wow-delay="{{ $key * 0.3 }}s">
+                                <div class="image">
+                                    <img src="{{ asset($value->image) }}" alt="">
+                                </div>
+                                <div class="title">
+                                    <h3>{{ $value->title }}</h3>
+                                </div>
+                                <div class="description">
+                                    <p>{!! $value->description !!}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="content wow animate__bounceIn" data-wow-duration="1s"
+                                        data-wow-delay="{{ $key * 0.3 }}s">
+                        <div class="title">
+                            <h2>{!! $service_quality->title !!}</h2>
+                        </div>
+                        <hr>
+                        <div class="description">
+                            {!! $service_quality->description !!}
+                        </div>
+                        <div class="link-button">
+                            <a href="{{ route('category', $service_quality->link) }}">
+                                View More
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="service-item-wrapper">
+                        @foreach ($service_items as $key => $value)
+                            @if ($loop->index < 2)
+                                @continue
+                            @endif
+                            <div class="service-item wow animate__bounceIn" data-wow-duration="1s"
+                                data-wow-delay="{{ $key * 0.3 }}s">
+                                <div class="image">
+                                    <img src="{{ asset($value->image) }}" alt="">
+                                </div>
+                                <div class="title">
+                                    <h3>{{ $value->title }}</h3>
+                                </div>
+                                <div class="description">
+                                    <p>{!! $value->description !!}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
     <!-- about ends -->
     <!-- about ends -->
     <!-- about ends -->
@@ -279,34 +354,153 @@
         </div>
     </section>
 
+
+
+    <section class="best-feature-section">
+        <div class="container">
+            <div class="row">
+                <div class="section-title">
+                    <h3><span>{{ $generalsetting->name }}</span> Best Features</h3>
+                </div>
+            </div>
+            <div class="row">
+                @foreach ($best_features as $key => $value)
+                    <div class="col-sm-4 wow animate__bounceIn" data-wow-duration="1s"
+                        data-wow-delay="{{ $key * 0.3 }}s">
+                        <div class="best-feature-item">
+                            <div class="image">
+                                <div class="feature-reveal wow animate__backInUp" data-wow-duration="0.5s"></div>
+                                <img src="{{ asset($value->image) }}" alt="">
+                            </div>
+                            <div class="title">
+                                <h3>{{ $value->title }}</h3>
+                            </div>
+                            <div class="description">
+                                {!! $value->description !!}
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <section class="how-work-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-11">
+                    <div class="section-title">
+                        <h3>How <span>{{ $generalsetting->name }}</span> Works</h3>
+                    </div>
+                    <div class="how-work-container">
+                        <div class="how-work-items-wrapper wow animate__bounceIn" data-wow-duration="1s"
+                            data-wow-delay="{{ $key * 0.3 }}s">
+                            @foreach ($how_works as $key => $value)
+                                @if ($loop->index >= 3)
+                                    @break
+                                @endif
+                                <div class="how-work-item  ">
+                                    <div class="image">
+                                        <div class="feature-reveal wow animate__backInUp" data-wow-duration="0.5s"></div>
+                                        <img src="{{ asset($value->image) }}" alt="">
+                                    </div>
+                                    <div class="content">
+
+                                        <div class="index">
+                                            <h2>
+                                                {{ $key + 1 }}
+                                            </h2>
+                                        </div>
+                                        <div class="title">
+                                            <h3>{{ $value->title }}</h3>
+                                        </div>
+                                        <div class="description">
+                                            {!! $value->description !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="how-work-items-wrapper second-wrapper wow animate__bounceIn" data-wow-duration="1s"
+                            data-wow-delay="{{ $key * 0.3 }}s">
+                            @foreach ($how_works as $key => $value)
+                                @if ($loop->index < 3 || $loop->index > 4)
+                                    @continue
+                                @endif
+                                <div class="how-work-item">
+                                    <div class="image">
+                                        <div class="feature-reveal wow animate__backInUp" data-wow-duration="0.5s"></div>
+                                        <img src="{{ asset($value->image) }}" alt="">
+                                    </div>
+                                    <div class="content">
+
+                                        <div class="index">
+                                            <h2>
+                                                {{ $key + 1 }}
+                                            </h2>
+                                        </div>
+                                        <div class="title">
+                                            <h3>{{ $value->title }}</h3>
+                                        </div>
+                                        <div class="description">
+                                            {!! $value->description !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="how-work-items-wrapper third-wrapper wow animate__bounceIn" data-wow-duration="1s"
+                            data-wow-delay="{{ $key * 0.3 }}s">
+                            @foreach ($how_works as $key => $value)
+                                @if ($loop->index < 5)
+                                    @continue
+                                @endif
+                                <div class="how-work-item">
+                                    <div class="image">
+                                        <div class="feature-reveal wow animate__backInUp" data-wow-duration="0.5s"></div>
+                                        <img src="{{ asset($value->image) }}" alt="">
+                                    </div>
+                                    <div class="content">
+
+                                        <div class="index">
+                                            <h2>
+                                                {{ $key + 1 }}
+                                            </h2>
+                                        </div>
+                                        <div class="title">
+                                            <h3>{{ $value->title }}</h3>
+                                        </div>
+                                        <div class="description">
+                                            {!! $value->description !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     @if ($whychooseinfo)
         <section class="why-choose-us">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-5 wow animate__bounceIn" data-wow-duration="1s">
-                        <div class="why-choose-info">
-                            <div class="subtitle">
-                                <span>{{ $whychooseinfo->subtitle }}</span>
-                            </div>
-                            <div class="title">
-                                <h2>{{ $whychooseinfo->title }}</h2>
-                            </div>
-                            <div class="description">
-                                <p>{!! $whychooseinfo->description !!}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-7">
-                        <div class="why-choose-item-wrapper">
+                    <div class="col-sm-12">
+                        <div class="row">
                             @foreach ($whychoose as $key => $value)
-                                <div class="why-choose-item wow animate__bounceIn" data-wow-duration="1s"
-                                    data-wow-delay="{{ $key * 0.3 }}s">
-                                    <div class="icon">
-                                        <i class="{{ $value->icon }}"></i>
-                                    </div>
-                                    <div class="content">
-                                        <h3>{{ $value->title }}</h3>
-                                        <p>{!! $value->description !!}</p>
+                                <div class="col-sm-6">
+                                    <div class="why-choose-item wow animate__bounceIn" data-wow-duration="1s"
+                                        data-wow-delay="{{ $key * 0.3 }}s">
+                                        <div class="image-wrapper">
+                                            <div class="image">
+                                                <img src="{{ asset($value->image) }}">
+                                            </div>
+                                        </div>
+                                        <div class="content">
+                                            <h3>{{ $value->title }}</h3>
+                                            <p>{!! $value->description !!}</p>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach

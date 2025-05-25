@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ArticaleCategory extends Model
+class BestFeature extends Model
 {
     protected $guarded = [];
 }

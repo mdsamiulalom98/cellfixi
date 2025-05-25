@@ -54,7 +54,7 @@ class SliderController extends Controller
         $input = $request->all();
         $input['image'] = $imageUrl;
 
-        $user = Slider::create($input);
+        Slider::create($input);
         Toastr::success('Success','Data insert successfully');
         return redirect()->route('slider.index');
     }

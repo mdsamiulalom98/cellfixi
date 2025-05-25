@@ -54,6 +54,7 @@ class SuccessRateController extends Controller
         $this->validate($request, [
             'count' => 'required',
         ]);
+
         $update_data = SuccessRate::find($request->id);
         $input = $request->all();
         $input['status'] = $request->status ? 1 : 0;

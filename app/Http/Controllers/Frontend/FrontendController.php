@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use App\Models\PortfolioCategory;
-use App\Models\ArticaleCategory;
 use App\Models\MissionVission;
 use App\Models\ShippingCharge;
 use App\Models\VisitorContact;
@@ -37,6 +36,7 @@ use App\Models\Agency;
 use App\Models\Client;
 use App\Models\Brand;
 use App\Models\About;
+use App\Models\BestFeature;
 use App\Models\Teams;
 use App\Models\Video;
 use App\Models\Offer;
@@ -45,6 +45,8 @@ use App\Models\Blog;
 use App\Models\Faq;
 use App\Models\OurPromise;
 use App\Models\SuccessRate;
+use App\Models\ServiceItem;
+use App\Models\ServiceQuality;
 
 class FrontendController extends Controller
 {
@@ -59,7 +61,6 @@ class FrontendController extends Controller
         $blogs = Blog::where('status', 1)->get();
         $about = About::where('status', 1)->first();
         $events = HowItWork::where('status', 1)->get();
-        $books = Portfolio::where('status', 1)->get();
         $advertisement = Advertisement::where('status', 1)->get();
         $companyphoto = Brand::where('status', 1)->limit(2)->get();
         $testimonials = Testimonial::where('status', 1)->get();
@@ -82,14 +83,17 @@ class FrontendController extends Controller
         }
 
         $onlycourse = Service::select('title', 'slug', 'status')->where('status', 1)->limit(8)->get();
-
         $ceomessage = Ceomessage::where('status', 1)->limit(4)->get();
         $videos = Video::where('status', 1)->limit(1)->get();
         $category = Category::where(['status' => 1])->first();
         $products = Product::where(['status' => 1, 'category_id'=> $category->id])->get();
         $our_promise = OurPromise::where('status', 1)->first();
         $success_rates = SuccessRate::where('status', 1)->get();
-        return view('frontEnd.layouts.pages.index', compact('sliders', 'service_all', 'whychoose', 'onlycourse', 'counters', 'counter_banner', 'blogs', 'companyphoto', 'testimonials', 'about', 'advertisement', 'books', 'events', 'brands', 'achievment', 'agencyleft', 'agencyright', 'oursuccess', 'weoffer', 'ceomessage', 'videos', 'image_cat', 'certificate', 'whychooseinfo', 'products', 'our_promise', 'success_rates'));
+        $service_items = ServiceItem::where('status', 1)->get();
+        $service_quality = ServiceQuality::where('status', 1)->first();
+        $best_features = BestFeature::where('status', 1)->get();
+        $how_works = HowItWork::where('status', 1)->get();
+        return view('frontEnd.layouts.pages.index', compact('sliders', 'service_all', 'whychoose', 'onlycourse', 'counters', 'counter_banner', 'blogs', 'companyphoto', 'testimonials', 'about', 'advertisement', 'events', 'brands', 'achievment', 'agencyleft', 'agencyright', 'oursuccess', 'weoffer', 'ceomessage', 'videos', 'image_cat', 'certificate', 'whychooseinfo', 'products', 'our_promise', 'success_rates', 'service_items', 'service_quality', 'best_features', 'how_works'));
     }
 
     public function about_us()
@@ -174,47 +178,19 @@ class FrontendController extends Controller
         $details = Blog::where('slug', $slug)->first();
         $blogs = Blog::where(['status' => 1])->get();
 
-        $frontcategory = ArticaleCategory::where(['status' => 1])
-            ->get();
 
         return view('frontEnd.layouts.pages.blogdetails', compact('details', 'blogs', 'frontcategory'));
     }
 
     public function summerydetails($id)
     {
-        $details = Portfolio::where('id', $id)->first();
         $shippingcharge = ShippingCharge::where('status', 1)->get();
         // return $details;
         return view('frontEnd.layouts.pages.summerydetails', compact('details', 'shippingcharge'));
 
     }
 
-    public function booksummeryorder_save(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required',
-            'area' => 'required',
-            'phone' => 'required',
-        ]);
 
-        $shipping_area = ShippingCharge::where('id', $request->area)->first();
-        $book_user = Portfolio::where('id', $request->book_id)->first();
-        // return $book_user;
-
-        $input = new BookOrder();
-        $input->book_id = $request->book_id;
-        $input->amount = $book_user->price + $shipping_area->amount;
-        $input->name = $request->name;
-        $input->phone = $request->phone;
-        $input->address = $request->address;
-        $input->price = $book_user->price;
-        $input->shipping_charge = $shipping_area->amount;
-        $input->order_status = '1';
-        // return $input;
-        $input->save();
-        Toastr::success('Thanks, Your order place successfully', 'Success!');
-        return redirect()->back();
-    }
 
     // new & publications section
     public function news()
@@ -230,8 +206,6 @@ class FrontendController extends Controller
         // return $details;
         $blogs = News::where(['status' => 1])->get();
 
-        $frontcategory = ArticaleCategory::where(['status' => 1])
-            ->get();
 
         return view('frontEnd.layouts.pages.newsdetails', compact('details', 'blogs', 'frontcategory'));
     }
@@ -322,12 +296,6 @@ class FrontendController extends Controller
         return view('frontEnd.layouts.pages.testblade');
     }
 
-    public function portfolios()
-    {
-        $pcategories = PortfolioCategory::where('status', 1)->get();
-        $portfolios = Portfolio::where('status', 1)->get();
-        return view('frontEnd.layouts.pages.portfolio', compact('portfolios', 'pcategories'));
-    }
     public function services()
     {
         $services = Service::where('status', 1)->get();
@@ -338,7 +306,6 @@ class FrontendController extends Controller
     {
         $details = Service::with('mentors')->where('slug', $slug)->first();
         $services = Service::where(['status' => 1])->get();
-        // return $services;
         return view('frontEnd.layouts.pages.servicedetails', compact('details', 'services'));
     }
     public function faqs()
@@ -359,7 +326,6 @@ class FrontendController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-
         ]);
 
         $input = new VisitorContact();
@@ -370,7 +336,6 @@ class FrontendController extends Controller
         $input->phone = $request->phone;
         $input->subject = $request->subject;
         $input->message = $request->message;
-        // return $input;
         $input->save();
 
         return redirect()->back();
@@ -382,7 +347,6 @@ class FrontendController extends Controller
             'phone' => 'required',
             'email' => 'required',
             'message' => 'required',
-
         ]);
 
         $input = new VisitorContact();
@@ -392,7 +356,6 @@ class FrontendController extends Controller
         $input->phone = $request->phone;
         $input->subject = $request->subject ?? 'No Subject';
         $input->message = $request->message;
-        // return $input;
         $input->save();
 
         return redirect()->back();

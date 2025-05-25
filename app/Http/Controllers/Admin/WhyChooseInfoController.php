@@ -38,7 +38,7 @@ class WhyChooseInfoController extends Controller
             'description' => 'required'
         ]);
         $input = $request->all();
-        $user = WhyChooseInfo::create($input);
+        WhyChooseInfo::create($input);
         Toastr::success('Success', 'Data insert successfully');
         return redirect()->route('whychooseinfos.index');
     }

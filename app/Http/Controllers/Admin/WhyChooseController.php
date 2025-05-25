@@ -28,12 +28,32 @@ class WhyChooseController extends controller
 
     public function store(Request $request){
         $this->validate($request, [
-            'icon' => 'required',
+            'image' => 'required',
             'title' => 'required',
             'description' => 'required'
         ]);
+
         $input = $request->all();
-        $user = WhyChoose::create($input);
+        $image = $request->file('image');
+        if ($image) {
+            $name =  time() . '-' . $image->getClientOriginalName();
+            $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
+            $name = strtolower(preg_replace('/\s+/', '-', $name));
+            $uploadpath = 'public/uploads/serviceitem/';
+            $imageUrl = $uploadpath . $name;
+            $img = Image::make($image->getRealPath());
+            $img->encode('webp', 90);
+            $width = "400";
+            $height = "400";
+            $img->height() > $img->width() ? $width = null : $height = null;
+            $img->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save($imageUrl);
+        } else {
+            $imageUrl = null;
+        }
+        WhyChoose::create($input);
         Toastr::success('Success','Data insert successfully');
         return redirect()->route('whychoose.index');
     }
@@ -45,12 +65,33 @@ class WhyChooseController extends controller
 
     public function update(Request $request){
         $this->validate($request, [
-            'icon' => 'required',
             'title' => 'required',
             'description' => 'required'
         ]);
         $input = $request->except('hidden_id');
         $update_data = WhyChoose::find($request->hidden_id);
+        $image = $request->file('image');
+        if ($image) {
+            // image with intervention
+            $name =  time() . '-' . $image->getClientOriginalName();
+            $name = preg_replace('"\.(jpg|jpeg|png|webp)$"', '.webp', $name);
+            $name = strtolower(preg_replace('/\s+/', '-', $name));
+            $uploadpath = 'public/uploads/whychoose/';
+            $imageUrl = $uploadpath . $name;
+            $img = Image::make($image->getRealPath());
+            $img->encode('webp', 90);
+            $width = "400";
+            $height = "400";
+            $img->height() > $img->width() ? $width = null : $height = null;
+            $img->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            File::delete($update_data->image);
+            $img->save($imageUrl);
+            $input['image'] = $imageUrl;
+        } else {
+            $input['image'] = $update_data->image;
+        }
         $input['status'] = $request->status?1:0;
         $update_data->update($input);
 
