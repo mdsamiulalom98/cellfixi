@@ -216,7 +216,8 @@ span.bar__margin {
 .subcat__name {
     text-align: center;
     width: 100%;
-    padding: 15px 0;
+    overflow: hidden;
+    height: 30px;
 }
 
 .subcat__name p {
@@ -227,7 +228,7 @@ span.bar__margin {
 
 .main__sec__subcat_front {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
     gap: 30px;
 }
 
@@ -4808,8 +4809,6 @@ section.about-us {
 
 .how-work-item .content {
     overflow: hidden;
-    -webkit-transform: rotate(315deg);
-    -ms-transform: rotate(315deg);
     transform: rotate(315deg);
     position: absolute;
     top: 80px;

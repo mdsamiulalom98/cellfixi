@@ -194,7 +194,7 @@
             <div class="service-counter-wrapper">
                 <div class="row">
                     @foreach ($counters as $key => $value)
-                        <div class="col-sm-3 wow animate__bounceIn" data-wow-duration="1s"
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3 wow animate__bounceIn" data-wow-duration="1s"
                             data-wow-delay="{{ $key * 0.1 }}s">
                             <div class="service-stat-item">
                                 <div class="service-item-image">
@@ -385,7 +385,48 @@
         </div>
     </section>
 
-    <section class="how-work-section">
+    <section class="how-work-section d-xl-none d-block">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-11">
+                    <div class="section-title">
+                        <h3>How <span>{{ $generalsetting->name }}</span> Works</h3>
+                    </div>
+                    <div class="how-work-container">
+                        <div class="how-work-items-wrapper wow animate__bounceIn" data-wow-duration="1s"
+                            data-wow-delay="{{ $key * 0.3 }}s">
+                            @foreach ($how_works as $key => $value)
+
+                                <div class="how-work-item  ">
+                                    <div class="image">
+                                        <div class="feature-reveal wow animate__backInUp" data-wow-duration="0.5s"></div>
+                                        <img src="{{ asset($value->image) }}" alt="">
+                                    </div>
+                                    <div class="content">
+
+                                        <div class="index">
+                                            <h2>
+                                                {{ $key + 1 }}
+                                            </h2>
+                                        </div>
+                                        <div class="title">
+                                            <h3>{{ $value->title }}</h3>
+                                        </div>
+                                        <div class="description">
+                                            {!! $value->description !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-work-section d-none d-xl-block">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-sm-11">
